@@ -1,5 +1,6 @@
 package com.example.roomwordsample;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -19,5 +20,5 @@ public interface WordDao {
     void deleteAll();
 
     @Query("SELECT * FROM word_table ORDER BY word ASC")
-    List<Word> getAlphabetizedWords();
+    LiveData<List<Word>> getAlphabetizedWords();
 }
