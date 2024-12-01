@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.RoomWordSample" parent="Base.Theme.RoomWordSample" />
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
