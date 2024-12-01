@@ -12,6 +12,7 @@ public class NewWordActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
 
+
     private EditText mEditWordView;
 
     @Override
@@ -32,5 +33,6 @@ public class NewWordActivity extends AppCompatActivity {
             }
             finish();
         });
+
     }
 }
