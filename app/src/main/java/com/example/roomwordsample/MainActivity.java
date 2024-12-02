@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +17,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
+
 public class MainActivity extends AppCompatActivity {
     private WordViewModel mWordViewModel;
     private WordListAdapter mAdapter;
-    private EditText editTextSearch;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             });
         });
-        editTextSearch = findViewById(R.id.editTextSearch);
+        EditText editTextSearch = findViewById(R.id.editTextSearch);
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -58,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     mAdapter = new WordListAdapter(new WordListAdapter.WordDiff());
                     recyclerView.setAdapter(mAdapter);
                 }
-                mWordViewModel.getFilteredWords(searchText).observe(MainActivity.this, words -> {
-                    mAdapter.submitList(words);
-                });
+                mWordViewModel.getFilteredWords(searchText).observe(MainActivity.this, words -> mAdapter.submitList(words));
             }
 
 
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
+            Word word = new Word(Objects.requireNonNull(data.getStringExtra(NewWordActivity.EXTRA_REPLY)));
             mWordViewModel.insert(word);
         } else {
             Toast.makeText(
